@@ -1,6 +1,8 @@
 # CpuTempMonitor
 Tiny cpu temperature monitor for windows
 
+ ***REMEMBER TO RUN IT AS ADMIN***
+
 # TLDR
 This is a tiny program that allow monitoring of the cpu temperature on windows machines. 
 The temperature reading is done via an embedded webserver so to view the cpu temp you need to navigate to the machine ip address at port 8888
