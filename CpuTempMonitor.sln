@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CpuTempMonitorHTTP", "CpuTempMonitorHTTP\CpuTempMonitorHTTP.csproj", "{D42F59CF-F770-4769-9F93-66F22C34FB95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CpuTempMonitorWS", "CpuTempMonitorWS\CpuTempMonitorWS.csproj", "{AD5306E1-EFBF-455F-859D-E62C5C5BCFD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D42F59CF-F770-4769-9F93-66F22C34FB95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D42F59CF-F770-4769-9F93-66F22C34FB95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D42F59CF-F770-4769-9F93-66F22C34FB95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D42F59CF-F770-4769-9F93-66F22C34FB95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD5306E1-EFBF-455F-859D-E62C5C5BCFD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD5306E1-EFBF-455F-859D-E62C5C5BCFD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD5306E1-EFBF-455F-859D-E62C5C5BCFD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD5306E1-EFBF-455F-859D-E62C5C5BCFD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F9800441-EC7A-467E-AB3F-6CCC1DE67EA9}
+	EndGlobalSection
+EndGlobal

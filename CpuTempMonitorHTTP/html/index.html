@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--No favicon-->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    
+    <title>CPU Temperature</title>
+    
+    <!--Document CSS-->
+    <style>
+        body {
+            font-family: arial,helvetica;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h2>Hold</h2>
+    </div>
+
+    <script type="text/javascript">
+        const bodyTemplate = '<h3 id="cpuName">{cpuname}</h3><div class="cpusensors">{sensors}</div >';
+        const sensorTemplate = '<div class="sens"><p> {Name} : {Temp} C°</p></div>';
+
+        var reqTimer;
+
+        //Request
+        var endpoint = window.location.href + 'api/cputemp';
+        var httpRequest = new XMLHttpRequest();
+
+        httpRequest.onreadystatechange = function () {
+            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                res = JSON.parse(this.responseText);
+                //Clean main div
+                document.getElementById("main").innerHTML = "";
+
+                res.forEach(cpu => {
+                    let tmpSensors = "";
+
+                    cpu.Sensors.forEach(sensor => {
+                        tmpSensors += sensorTemplate.replace("{Name} : {Temp}", sensor.Name + ' : ' + sensor.Temp);
+                    });
+
+                    let tmpBody = bodyTemplate.replace('{cpuname}', cpu.Name)
+                        .replace('{sensors}', tmpSensors)
+
+                    document.getElementById("main").innerHTML += tmpBody;
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            httpRequest.open("GET", endpoint, true);
+            httpRequest.send();
+            reqTimer = setInterval(function () {
+                httpRequest.open("GET", endpoint, true);
+                httpRequest.send();
+            }, 3000);
+        }, false);
+
+    </script>
+</body>
+</html>

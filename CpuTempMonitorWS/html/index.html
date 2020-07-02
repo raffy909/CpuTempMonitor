@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Temperature</title>
+
+    <!--No favicon-->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+    <!--Document CSS-->
+    <style>
+        body {
+            font-family: arial,helvetica;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h2>Hold</h2>
+    </div>
+
+    <script type="text/javascript">
+        const bodyTemplate = '<h3 id="cpuName">{cpuname}</h3><div class="cpusensors">{sensors}</div >';
+        const sensorTemplate = '<div class="sens"><p> {Name} : {Temp} C°</p></div>';
+
+        var reqTimer;
+
+        var host = window.location.host;
+        const socket = new WebSocket('ws://' + host + '/ws');
+
+        socket.onopen = function (event) {
+            socket.send(JSON.stringify({ RequestPayload: "cputemp" }));
+            reqTimer = setInterval(function () {
+                socket.send(JSON.stringify({ RequestPayload: "cputemp" }));
+            }
+            , 3000);
+        }
+
+        socket.onclose = function (event) {
+            clearTimeout(reqTimer);
+        }
+
+        socket.onmessage = function (event) {
+            var body = "";
+
+            res = JSON.parse(event.data);
+            console.log(res);
+
+            if (res.ResponseCode == 200) {
+                document.getElementById("main").innerHTML = "";
+                res.ResponsePayload.forEach(cpu => {
+
+                    let tmp = "";
+                    cpu.Sensors.forEach(sensor => {
+                        tmp += sensorTemplate.replace("{Name} : {Temp}", sensor.Name + ' : ' + sensor.Temp);
+                    });
+
+                    let tmpBody = bodyTemplate.replace('{cpuname}', cpu.Name).replace('{sensors}', tmp);
+
+                    document.getElementById("main").innerHTML += tmpBody;
+                });
+            };
+        };
+
+    </script>
+</body>
+</html>
